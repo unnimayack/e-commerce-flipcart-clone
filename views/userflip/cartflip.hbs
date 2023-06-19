@@ -1,0 +1,102 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 p-3 m-5">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td class="heading" scope="col">Item</td>
+                            <td class="heading" scope="col">Title</td>
+                            <td class="heading" scope="col">Price</td>
+                            <td class="heading" scope="col">Quantity</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                        <tr>
+                            <td><img style="width:50px ;height: 60px ;object-fit:fill"
+                                    src="/product-images/{{this.product._id}}.jpg"></td>
+                            <td>{{this.product.Name}}</td>
+                            <td>Rs:{{this.product.Price}}</td>
+
+                            <td>
+                                <button class="cart-item-count mr-3 btn-secondary"
+                                    onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)">-</button>
+                                <span id="{{this.product._id}}">{{this.quantity}}</span>
+                                <button class="cart-item-count ml-3 btn-secondary"
+                                    onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)">+</button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger"
+                                    onclick="removeProduct('{{this._id}}','{{this.product._id}}')">Remove</button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+            <div class="col-md-12">
+                <div class=" total float-right pr-3">
+                    <h3 class="float-left mr-5">Total: RS. <span id="total">{{totalValue}}</span></h3>
+                    <a href="/place-order" class="float-right btn btn-success mt-3" style="width: 100%">Place Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<script>
+    function changeQuantity(cartId, prodId, userId, count) {
+        let quantity = parseInt(document.getElementById(prodId).innerHTML)
+        count = parseInt(count)
+        //console.log("cart userID"+userId)
+        $.ajax({
+            url: '/change-product-quantity',
+            data: {
+
+                cart: cartId,
+                product: prodId,
+                user: userId,
+                count: count,
+                quantity: quantity
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.removeProduct) {
+
+                    alert("product removed form cart")
+
+                    window.location.reload(true)
+                    window.location.href = '/cart'
+                } else {
+                    console.log(response)
+                    document.getElementById(prodId).innerHTML = quantity + count
+                    document.getElementById('total').innerHTML = response.total
+                }
+            }
+        })
+    }
+
+    function removeProduct(cartId, prodId) {
+        $.ajax({
+            url: '/remove-product',
+            data: {
+                cart: cartId,
+                product: prodId,
+            },
+            method: 'post',
+            success: (response) => {
+                console.log("response" + response)
+                if (response.removeProduct) {
+
+                    alert('Are you sure want to delete the product ')
+
+                    window.location.reload(true)
+                    window.location.href = '/cart'
+                }
+            }
+        })
+    }
+</script>

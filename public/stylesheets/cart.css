@@ -1,0 +1,18 @@
+.cart-table {
+    margin-top: 70px;
+}
+
+.heading {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.total {
+    margin-top: -50px;
+    margin-bottom: 40px;
+}
+
+.cart-item-count:focus {
+    box-shadow: none;
+    outline: 0;
+}

@@ -1,0 +1,25 @@
+.delivery {
+    margin-top: 100px;
+}
+
+.address {
+    font-size: 17px;
+    margin-top: 8px;
+    margin-bottom: -3px;
+}
+
+.total {
+    font-weight: 600;
+}
+
+.payment {
+    font-size: 19px;
+}
+
+.radio-inline {
+    font-size: 17px;
+}
+
+.cod {
+    margin-right: 3px;
+}

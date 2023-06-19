@@ -1,0 +1,50 @@
+<section>
+  <div class="container">
+    <div class="row mt-3">
+      {{#if adminLogin}}
+      <a href="/admin/addflip-products" class="btn btn-success ml-auto">Add Product</a>
+      {{/if}}
+    </div>
+    <div class="p-5">
+      <table class="table mt-5 " id="productsTable">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th>Image</th>
+            <th>Options</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {{#each products}}
+          <tr>
+            <th scope="row">{{@index}}</th>
+            <td>{{this.Name}}</td>
+            <td>{{this.Category}}</td>
+            <td>{{this.Price}}</td>
+            <td>{{this.Description}}</td>
+
+            <td><img style="width: 50px; height: 60px" src="/product-images/{{this._id}}.jpg" alt=""></td>
+
+            <td>
+              <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
+              <a href="/admin/delete-product/{{this._id}}" class="btn btn-danger"
+                onclick="return confirm('Are you sure want to delete?  {{this.Name}}')">Delete</a>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<script>
+  $(function () {
+    $('#productsTable').DataTable();
+  });
+</script>

@@ -1,0 +1,76 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="nav-admin">
+            <a class="navbar-brand" href="#">ADMIN PANEL</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin/all-products">All products <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin/all-users">All users</a>
+                </li>
+            </ul>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{#if adminLogin}}
+                    {{adminLogin.Name}}
+                    {{else }}
+                    Account
+                    {{/if}}
+
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {{#if adminLogin}}
+                    <a class="dropdown-item" href="/admin/adminlogout">adminLogout</a>
+                    {{else}}
+                    <a class="dropdown-item" href="/admin/adminlogin">adminLogin</a>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        </div>
+    </nav>
+</header>
+
+<style>
+    nav {
+        background-color: #eea29e;
+    }
+
+    .navbar-brand {
+        color: black !important;
+        font-weight: bolder;
+        font-size: 30px;
+    }
+
+    nav a .navbar-brand {
+        color: aliceblue;
+    }
+
+    .dropdown {
+        margin-right: 40px;
+    }
+
+    .dropdown .dropdown-menu {
+        width: 120px;
+        height: 40px;
+    }
+
+    .dropdown-menu {
+        min-width: 10%;
+    }
+
+    .dropdown-item {
+        padding-inline-start: 0px;
+    }
+</style>
